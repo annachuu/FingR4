@@ -4,18 +4,17 @@ has the ability to portray common hand gestures using preset buttons.
 
 ## Features
 - Preset button to fixed hand position
-- Ultrasonic Sensor to waves to audience once senses a figure close in distance
-- Servo motors to act as joints of hand
-- Potentiometer to rotate servo motors
+- Waves to audience once sensor senses a figure close enough in distance
+
 
 ## Materials
-- Arduino Uno R4 Circuit Board
-- Breadboard
-- Wires
-- Ultrasonic Sensor
-- Button
-- Potentiometer
-- Servo Motors
+- **Arduino Uno R4 Circuit Board**: 
+- **Breadboard**: 
+- **Wires**: Connects input and output ports
+- **Ultrasonic Sensor**: Senses the distance between people 
+- **Button**: Preset buttons for specific hand positions and gestures
+- **Potentiometer**: (optional?) Rotations the servo motors
+- **Servo Motors**: Acts as joints to display motion
 
 ## Team Members
 - Anna Chu
