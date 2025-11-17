@@ -1,1 +1,4 @@
 /* All the references used for this project */
+https://tinkercircuits.com/hand-gesture-controlled-servo-system/ 
+https://learn.adafruit.com/animatronic-hands?view=all
+https://www.youtube.com/watch?v=Q70jCXvSVDQ
