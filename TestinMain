@@ -1,0 +1,56 @@
+#include <Servo.h> // Include the Servo library
+
+Servo wristServo0; // Vertical Wrist front
+Servo wristServo1; // Vertical Wrist Back
+Servo wristServo2; // Vertical Wrist Right
+Servo wristServo3; // Vertical Wrist Left
+
+Servo fingerServo0; // Thumb
+Servo fingerServo1; // Index
+Servo fingerServo2; // Ring Finger
+Servo fingerServo3; // Heart Finger
+Servo fingerServo4; // Pinky
+
+int servoAngle;
+
+
+// **INSERT ANALOG INPUT DEFINITION HERE**
+
+void setup() {
+  wristServo0.attach(2); // Attach the servo to pin 2
+  wristServo1.attach(3); // pin 3
+  wristServo2.attach(4); // pin 4
+  wristServo3.attach(5); // pin 5
+
+  fingerServo0.attach(13); // pin 13
+  fingerServo1.attach(12); // pin 12
+  fingerServo2.attach(11); // pin 11
+  fingerServo3.attach(10); // pin 10
+  fingerServo4.attach(9); // pin 9
+
+  pinMode(2, OUTPUT); // Set pins as output
+  pinMode(3, OUTPUT);
+  pinMode(4, OUTPUT);
+  pinMode(5, OUTPUT);
+
+  pinMode(13, OUTPUT);
+  pinMode(12, OUTPUT);
+  pinMode(11, OUTPUT);
+  pinMode(10, OUTPUT);
+  pinMode(9, OUTPUT);
+}
+
+void loop() {
+  wristServo0.write(0); // move to 0 degrees
+  delay(1000);
+  wristServo0.write(90);
+  delay(1000);
+  wristServo0.write(180);
+  delay(1000);
+  wristServo0.write(0);
+  delay(1000);
+
+  // **INSERT MAPPING LINE HERE**
+  wristServo0.write(servoAngle); // Set the servo to the calculated angle
+  delay(15); // Small delay for smooth movement
+}
