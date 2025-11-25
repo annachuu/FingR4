@@ -1,0 +1,42 @@
+/*
+  This Lab program is a combination of Lab 4 (Buttons * Potentiometers) and Lab 6 (DC Motors, Servo Motors, Step Motors)
+
+  Materials:
+    - Button
+    - Servo Motor
+    - Wires
+    - Breadboard
+    - Arduino Uno R4
+*/
+
+#include <Servo.h>
+#define SERVO_PIN 10
+#define BUTTON_PIN 2        // connecting pin to the button
+
+Servo myServo;
+
+// button variables
+bool buttonState = false;
+bool lastButtonState = false;
+
+void setup() {
+  myServo.attach(10);  // Attach servo to pin 10
+  pinMode(SERVO_PIN, OUTPUT);
+  pinMode(BUTTON_PIN, INPUT_PULLUP);
+}
+
+void loop() {
+  // button state
+  buttonState = digitalRead(BUTTON_PIN);
+
+  if (buttonState == LOW && lastButtonState == HIGH)
+  {
+    myServo.write(0);    // Move to 0 degrees
+    delay(1000);
+    myServo.write(90);   // Move to 90 degrees
+    delay(1000);
+    myServo.write(180);  // Move to 180 degrees
+  }
+
+  lastButtonState = buttonState;
+}
