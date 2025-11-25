@@ -1,0 +1,48 @@
+#define LIGHT_PIN A0
+#define LED_PIN 9
+
+#include <Wire.h>
+#include <LiquidCrystal_I2C.h>
+
+// Initialize the LCD
+LiquidCrystal_I2C lcd(0x27, 16, 2); // Adjust address (0x27) if necessary (16 in the # of horizontal characters, 02 is the # of vertical lines)
+
+void setup() {
+  pinMode(LED_PIN, OUTPUT);
+  Serial.begin(9600);  // Start serial communication at 9600 baud rate
+
+  lcd.init();
+  lcd.backlight();
+  lcd.setCursor(0, 0); // Set cursor to the first column of the first row
+  lcd.print("I don't know-");
+  lcd.setCursor(0, 1); // Move to the second row
+  lcd.print("What I'm Doing!");
+}
+
+void loop() {
+  int lightLevel = analogRead(LIGHT_PIN);
+
+  // Print the light level to the serial monitor
+  Serial.print("Light Level: ");
+  Serial.println(lightLevel);
+
+  if (lightLevel < 700) { // Adjust threshold as needed
+    digitalWrite(LED_PIN, HIGH);
+
+    lcd.setCursor(0, 0); // Set cursor to the first column of the first row
+    lcd.print("The Code!    ");
+    lcd.setCursor(0, 1); // Move to the second row
+    lcd.print("It Works!      ");
+
+
+  } else {
+    digitalWrite(LED_PIN, LOW);
+
+    lcd.setCursor(0, 0); // Set cursor to the first column of the first row
+    lcd.print("I don't know-");
+    lcd.setCursor(0, 1); // Move to the second row
+    lcd.print("What I'm Doing!");
+  }
+  delay(100);
+}
+
