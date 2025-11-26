@@ -14,87 +14,89 @@
 #define SERVO_PIN3 12
 #define SERVO_PIN4 13
 
-// Buttons
+/* Button Variables */
 #define BUTTON_PIN1 2        // connecting pin to the button
-// #define BUTTON_PIN2 3
+#define BUTTON_PIN2 3
+#define BUTTON_PIN3 4
 
 // Finger motors
-Servo finger0;
-Servo finger1;
-Servo finger2;
-Servo finger3;
-Servo finger4;
+Servo finger[5];
+
+// Button Last States
+bool lastState1 = HIGH;
+bool lastState2 = HIGH;
+bool lastState3 = HIGH;
 
 
-/* Button Variables */
-// Button 1, Position 1
-bool buttonState1 = false;
-bool lastbuttonState1 = false;
+// Finger Angles to open and close
+const int OPEN = 0;
+const int CLOSE = 180;
 
-// // Button 2, Position 2
-// bool buttonState2 = false;
-// bool lastbuttonState2 = false;
+void moveHand(int f0, int f1, int f2, int f3, int f4)
+{
+  int target[5] = {f0, f1, f2, f3, f4};
 
+  for (int i = 0; i < 5; i++)
+    {
+      finger[i].write(target[i]);
+      delay(300);
+    }
+}
+
+
+/* Preset Position Functions */
+void peaceSign()
+{
+  moveHand(CLOSE, OPEN, OPEN, CLOSE, CLOSE);
+}
+
+void thumbsUp()
+{
+  moveHand(OPEN, CLOSE, CLOSE, CLOSE, CLOSE);
+}
+
+void middleFinger()
+{
+  moveHand(CLOSE, CLOSE, OPEN, CLOSE, CLOSE);
+}
 
 void setup() {
-  finger0.attach(9);  // Attach servo to pin 10
-  finger1.attach(10);
-  finger2.attach(11);
-  finger3.attach(12);
-  finger4.attach(13);
-
-  pinMode(SERVO_PIN0, OUTPUT);
-  pinMode(SERVO_PIN1, OUTPUT);
-  pinMode(SERVO_PIN2, OUTPUT);
-  pinMode(SERVO_PIN3, OUTPUT);
-  pinMode(SERVO_PIN4, OUTPUT);
+  finger0.attach(SERVO_PIN0);  // Attach servo to pin 10
+  finger1.attach(SERVO_PIN1);
+  finger2.attach(SERVO_PIN2);
+  finger3.attach(SERVO_PIN3);
+  finger4.attach(SERVO_PIN4);
 
   pinMode(BUTTON_PIN1, INPUT_PULLUP);
+  pinMode(BUTTON_PIN2, INPUT_PULLUP);
+  pinMode(BUTTON_PIN3, INPUT_PULLUP);
 
-  // finger0.attach(11);  // Attach servo to pin 11
-  // pinMode(SERVO_PIN2, OUTPUT);
-  // pinMode(BUTTON_PIN2, INPUT_PULLUP);
-
-  // Setting motors to 0deg
-  finger0.write(0);
-  finger1.write(0);
-  finger2.write(0);
-  finger3.write(0);
-  finger4.write(0);
+  // staring with open hand
+  for (int i = 0; i < 5; i++)
+  {
+    finger[i].write(OPEN);
+  }   
 }
 
 void loop() {
   // button state
-  buttonState1 = digitalRead(BUTTON_PIN1);
-  // buttonState2 = digitalRead(BUTTON_PIN2);
+  bool positionPeace = digitalRead(BUTTON_PIN1);
+  bool positionThumb = digitalRead(BUTTON_PIN2);
+  bool positionMiddle = digitalRead(BUTTON_PIN3);
 
-  if (buttonState1 == LOW && lastbuttonState1 == HIGH)
+  // IF button 1-3 are pressed
+  if (positionPeace == LOW && lastState1 == HIGH)
   {
-    finger0.write(0);
-    finger1.write(0);
-    finger2.write(0);
-    finger3.write(0);
-    finger4.write(0);
-
-    finger0.write(180);  // Move to 180 degrees
-    delay(1000);
-    finger1.write(180);  // Move to 180 degrees
-    delay(1000);
-    finger2.write(180);  // Move to 180 degrees
-    delay(1000);
-    finger3.write(180);  // Move to 180 degrees
-    delay(1000);
-    finger4.write(180);  // Move to 180 degrees
-    delay(1000);
+    peaceSign();
+  }
+  else if (positionThumb == LOW && lastState2 == HIGH)
+  {
+    thumbsUp();
+  }
+  else if (positionMiddle == LOW && lastState3 == HIGH)
+  {
+    middleFinger();
   }
 
-  // if (buttonState2 == LOW && lastbuttonState2 == HIGH)
-  // {
-  //   finger0.write(0);    // Move to 0 degrees
-  //   delay(1000);
-  //   finger0.write(90);   // Move to 90 degrees
-  // }
-
-  lastbuttonState1 = buttonState1;
-  // lastbuttonState2 = buttonState2;
+  delay(1000);
 }
