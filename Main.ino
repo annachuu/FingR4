@@ -4,15 +4,97 @@
   Due:     December 1, 2025
 */
 
+#include <Servo.h>
+
 /* Global Variables */
+// Servo motors
+#define SERVO_PIN0 9
+#define SERVO_PIN1 10
+#define SERVO_PIN2 11
+#define SERVO_PIN3 12
+#define SERVO_PIN4 13
+
+// Buttons
+#define BUTTON_PIN1 2        // connecting pin to the button
+// #define BUTTON_PIN2 3
+
+// Finger motors
+Servo finger0;
+Servo finger1;
+Servo finger2;
+Servo finger3;
+Servo finger4;
 
 
-void setup()
-{
-  
+/* Button Variables */
+// Button 1, Position 1
+bool buttonState1 = false;
+bool lastbuttonState1 = false;
+
+// // Button 2, Position 2
+// bool buttonState2 = false;
+// bool lastbuttonState2 = false;
+
+
+void setup() {
+  finger0.attach(9);  // Attach servo to pin 10
+  finger1.attach(10);
+  finger2.attach(11);
+  finger3.attach(12);
+  finger4.attach(13);
+
+  pinMode(SERVO_PIN0, OUTPUT);
+  pinMode(SERVO_PIN1, OUTPUT);
+  pinMode(SERVO_PIN2, OUTPUT);
+  pinMode(SERVO_PIN3, OUTPUT);
+  pinMode(SERVO_PIN4, OUTPUT);
+
+  pinMode(BUTTON_PIN1, INPUT_PULLUP);
+
+  // finger0.attach(11);  // Attach servo to pin 11
+  // pinMode(SERVO_PIN2, OUTPUT);
+  // pinMode(BUTTON_PIN2, INPUT_PULLUP);
+
+  // Setting motors to 0deg
+  finger0.write(0);
+  finger1.write(0);
+  finger2.write(0);
+  finger3.write(0);
+  finger4.write(0);
 }
 
-void loop()
-{
-  
-}  
+void loop() {
+  // button state
+  buttonState1 = digitalRead(BUTTON_PIN1);
+  // buttonState2 = digitalRead(BUTTON_PIN2);
+
+  if (buttonState1 == LOW && lastbuttonState1 == HIGH)
+  {
+    finger0.write(0);
+    finger1.write(0);
+    finger2.write(0);
+    finger3.write(0);
+    finger4.write(0);
+
+    finger0.write(180);  // Move to 180 degrees
+    delay(1000);
+    finger1.write(180);  // Move to 180 degrees
+    delay(1000);
+    finger2.write(180);  // Move to 180 degrees
+    delay(1000);
+    finger3.write(180);  // Move to 180 degrees
+    delay(1000);
+    finger4.write(180);  // Move to 180 degrees
+    delay(1000);
+  }
+
+  // if (buttonState2 == LOW && lastbuttonState2 == HIGH)
+  // {
+  //   finger0.write(0);    // Move to 0 degrees
+  //   delay(1000);
+  //   finger0.write(90);   // Move to 90 degrees
+  // }
+
+  lastbuttonState1 = buttonState1;
+  // lastbuttonState2 = buttonState2;
+}
