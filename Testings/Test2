@@ -1,0 +1,78 @@
+/*
+  This Lab program is a combination of Lab 4 (Buttons * Potentiometers) and Lab 6 (DC Motors, Servo Motors, Step Motors)
+
+  Materials:
+    - Button
+    - Servo Motor
+    - Wires
+    - Breadboard
+    - Arduino Uno R4
+*/
+
+#include <Servo.h>
+#define SERVO_PIN0 13
+#define SERVO_PIN1 12
+#define SERVO_PIN1 11
+#define SERVO_PIN1 10
+#define SERVO_PIN1 9
+#define BUTTON_PIN 2        // connecting pin to the button
+
+Servo fingerServo0;
+Servo fingerServo1;
+Servo fingerServo2;
+Servo fingerServo3;
+Servo fingerServo4;
+
+// button variables
+bool buttonState = false;
+bool lastButtonState = false;
+
+void setup() {
+  fingerServo0.attach(13);  // Attach servo to pin 13
+  fingerServo1.attach(12);
+  fingerServo2.attach(11);
+  fingerServo3.attach(10);
+  fingerServo4.attach(9);
+  
+  pinMode(SERVO_PIN0, OUTPUT);
+  pinMode (SERVO_PIN1, OUTPUT);
+  pinMode(BUTTON_PIN, INPUT_PULLUP);
+  
+  fingerServo0.write(0);
+  fingerServo1.write(0);
+  fingerServo2.write(0);
+  fingerServo3.write(0);
+  fingerServo4.write(0);
+}
+
+void loop() {
+  // button state
+  buttonState = digitalRead(BUTTON_PIN);
+
+  if (buttonState == LOW && lastButtonState == HIGH)
+  {
+    fingerServo0.write(180);  // Move to 180 degrees
+    delay(100);
+    fingerServo1.write(180); 
+    delay(100);
+    fingerServo2.write(180);
+    delay(100);
+    fingerServo3.write(180);
+    delay(100);
+    fingerServo4.write(180);
+    delay(2000);
+    
+    fingerServo0.write(0);  // Move to 0 degrees
+    delay(100);
+    fingerServo1.write(0);
+    delay(100);
+    fingerServo2.write(0);
+    delay(100);
+    fingerServo3.write(0);
+    delay(100);
+    fingerServo4.write(0);
+    delay(500);
+  }
+
+  lastButtonState = buttonState;
+}
