@@ -98,5 +98,10 @@ void loop() {
     middleFinger();
   }
 
-  delay(1000);
+  lastState1 = positionPeace;
+  lastState2 = positionThumb;
+  lastState3 = positionMiddle;
+
+
+  delay(100);
 }
