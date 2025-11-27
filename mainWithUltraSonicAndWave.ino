@@ -83,8 +83,11 @@ float getDistance()
   digitalWrite(TRIG_PIN, LOW);
 
   long duration = pulseIn(ECHO_PIN, HIGH);
-  if (duration == 0) return 999;
-
+  if (duration == 0) 
+  {
+    return 999;
+  }
+  
   float distance = (duration * 0.034) / 2;
   return distance;
 }
@@ -164,7 +167,7 @@ void loop() {
   }
   else
   {
-    if (millis() - lastGestureTime > 2000)
+    if (millis() - lastGestureTime > 60000)      // repeat every 1min
     {
       beckon();
       beckon();
