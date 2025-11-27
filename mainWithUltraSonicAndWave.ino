@@ -1,5 +1,3 @@
-/* USING ULTRASONIC SENSOR */
-
 /*
   CS 207 - Final Project
   Members: Anna Chu, Rojen Bolito, Aimee Nguyen
@@ -7,8 +5,6 @@
 */
 
 #include <Servo.h>
-#define TRIG_PIN 8
-#define ECHO_PIN 7
 
 /* Global Variables */
 // Servo motors
@@ -18,6 +14,9 @@
 #define SERVO_PIN3 12
 #define SERVO_PIN4 13
 
+#define TRIG_PIN 8
+#define ECHO_PIN 7
+
 /* Button Variables */
 #define BUTTON_PIN1 2        // connecting pin to the button
 #define BUTTON_PIN2 3
@@ -25,6 +24,7 @@
 
 // Finger motors
 Servo finger[5];
+Servo waveServo;
 
 // Button Last States
 bool lastState1 = HIGH;
@@ -35,6 +35,9 @@ bool lastState3 = HIGH;
 // Finger Angles to open and close
 const int OPEN = 180;
 const int CLOSE = 0;
+
+bool userClose = false;
+unsigned long lastGestureTime = 0;
 
 void moveHand(int f0, int f1, int f2, int f3, int f4)
 {
@@ -71,12 +74,49 @@ void middleFinger()
 }
 
 
+float getDistance()
+{
+  digitalWrite(TRIG_PIN, LOW);
+  delayMicroseconds(2);
+  digitalWrite(TRIG_PIN, HIGH);
+  delayMicroseconds(10);
+  digitalWrite(TRIG_PIN, LOW);
+
+  long duration = pulseIn(ECHO_PIN, HIGH);
+  if (duration == 0) return 999;
+
+  float distance = (duration * 0.034) / 2;
+  return distance;
+}
+
+void waveHand()
+{
+  for (int i = 90; i <= 130; i++)
+  {
+    waveServo.write(i);
+    delay(10);
+  }
+  for (int i = 130; i >= 50; i--)
+  {
+    waveServo.write(i);
+    delay(10);
+  }
+  for (int i = 50; i <= 90; i++)
+  {
+    waveServo.write(i);
+    delay(10);
+  }
+}
+
+void beckon()
+{
+  moveHand(OPEN, OPEN, OPEN, OPEN, CLOSE);
+  moveHand(OPEN, OPEN, OPEN, OPEN, OPEN);
+}
+
+
+
 void setup() {
-  // setup for ultrasonic sensor
-  Serial_begin(9600);
-  pinMode(TRIG_PIN, OUTPUT);
-  pinMode(ECHO_PIN, INPUT);
-  
   finger[0].attach(9);  // Attach servo to pin 10
   finger[1].attach(10);
   finger[2].attach(11);
@@ -92,31 +132,49 @@ void setup() {
   {
     finger[i].write(OPEN);
   }   
+
+  // ultrasonic and waving
+  pinMode(TRIG_PIN, OUTPUT);
+  pinMode(ECHO_PIN, INPUT);
+  waveServo.attach(8);
+  waveServo.write(90);
 }
 
 void loop() {
-  // sensor
-  digitalWrite(TRIG_PIN, LOW);
-  digitalMicroseconds(2);
-  digitalWrite(TRIG_PIN, HIGH);
-  digitalMicroseconds(10);
-  digitalWrite(TRIG_PIN, LOW);
+  // getting distance
+  float d = getDistance();
+  bool nowClose = (d < 30);
 
-  long duration = pulseIn(ECHO_PIN, HIGH);
-
-  if (duration == 0)
+  // Coming near to wave
+  if (nowClose && !userClose)
   {
-    Serial.printLn("No echo detected");
+    userClose = true;
+  }
+
+  // Leave to beckon motion (come here)
+  if (!nowClose && userClose)
+  {
+    userClose = false;
+  }
+
+  // IF use, THEN wave until a button press
+  if (userClose)
+  {
+    waveHand();
   }
   else
   {
-    float distance = (duration * 0.034) / 2;
-    Serial.print("Distnce: ");
-    Serial.print(distance);
-    Serial.print(" cm");
+    if (millis() - lastGestureTime > 2000)
+    {
+      beckon();
+      beckon();
+      beckon();
+      lastGestureTime = millis();
+    }
   }
-  
-  
+
+
+
   // button state
   bool positionPeace = digitalRead(BUTTON_PIN1);
   bool positionThumb = digitalRead(BUTTON_PIN2);
