@@ -43,6 +43,17 @@ void moveHand(int f0, int f1, int f2, int f3, int f4)
     }
 }
 
+void waveHand(int f8, int f9)
+{
+  int target[2] = {f8, f9};
+
+ for (int i = 0; i < 2; i++)
+  {
+    finger[i].write(target[i]);
+    delay(300);
+  }
+}
+
 
 /* Preset Position Functions */
 void peaceSign()
@@ -59,11 +70,18 @@ void thumbsUp()
   moveHand(OPEN, OPEN, OPEN, OPEN, OPEN);
 }
 
-void middleFinger()
+// void middleFinger()
+// {
+//   moveHand(CLOSE, CLOSE, OPEN, CLOSE, CLOSE);
+//   delay(1000);
+//   moveHand(OPEN, OPEN, OPEN, OPEN, OPEN);
+// }
+
+void waving()
 {
-  moveHand(CLOSE, CLOSE, OPEN, CLOSE, CLOSE);
+  waveHand(OPEN, OPEN);
   delay(1000);
-  moveHand(OPEN, OPEN, OPEN, OPEN, OPEN);
+  waveHand(CLOSE, CLOSE);
 }
 
 void setup() {
@@ -101,7 +119,7 @@ void loop() {
   }
   else if (positionMiddle == LOW && lastState3 == HIGH)
   {
-    middleFinger();
+    waving();
   }
 
   lastState1 = positionPeace;
