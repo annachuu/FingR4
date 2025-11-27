@@ -61,11 +61,11 @@ void middleFinger()
 }
 
 void setup() {
-  finger0.attach(SERVO_PIN0);  // Attach servo to pin 10
-  finger1.attach(SERVO_PIN1);
-  finger2.attach(SERVO_PIN2);
-  finger3.attach(SERVO_PIN3);
-  finger4.attach(SERVO_PIN4);
+  finger0.attach(9);  // Attach servo to pin 10
+  finger1.attach(10);
+  finger2.attach(11);
+  finger3.attach(12);
+  finger4.attach(13);
 
   pinMode(BUTTON_PIN1, INPUT_PULLUP);
   pinMode(BUTTON_PIN2, INPUT_PULLUP);
