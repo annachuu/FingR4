@@ -29,8 +29,8 @@ bool lastState3 = HIGH;
 
 
 // Finger Angles to open and close
-const int OPEN = 0;
-const int CLOSE = 180;
+const int OPEN = 180;
+const int CLOSE = 0;
 
 void moveHand(int f0, int f1, int f2, int f3, int f4)
 {
