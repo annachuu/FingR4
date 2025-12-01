@@ -155,7 +155,7 @@ void loop() {
   // getting distance
   // float d = getDistance();
   getDistance();
-  bool nowClose = (d < 30);
+  // bool nowClose = (d < 30);
 
   // Coming near to wave
   if (nowClose && !userClose)
