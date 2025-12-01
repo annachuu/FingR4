@@ -1,5 +1,5 @@
-# Robotic-Arm
-This robotic arm will wave at audience once it senses a closeness in distance. It also
+# FingR4
+Is a robotic arm will wave at audience once it senses a closeness in distance. It also
 has the ability to portray common hand gestures using preset buttons.
 
 ## Features
