@@ -95,6 +95,7 @@ float getDistance()
     Serial.print(" cm");
   }
   // return distance;
+  delay(500);
 }
 
 void waveHand()
@@ -152,7 +153,8 @@ void setup() {
 
 void loop() {
   // getting distance
-  float d = getDistance();
+  // float d = getDistance();
+  getDistance();
   bool nowClose = (d < 30);
 
   // Coming near to wave
