@@ -86,16 +86,15 @@ float getDistance()
   if (duration == 0) 
   {
     Serial.println("No echo detected");
+    return -1;
   }
-  else
-  {
-    float distance = (duration * 0.034) / 2;
-    Serial.print("Distance: ");
-    Serial.print(distance);
-    Serial.print(" cm");
-  }
-  // return distance;
-  delay(500);
+  float distance = (duration * 0.034) / 2;
+  Serial.print("Distance: ");
+  Serial.print(distance);
+  Serial.print(" cm");
+
+  return distance;
+  // delay(500);
 }
 
 void waveHand()
@@ -153,9 +152,8 @@ void setup() {
 
 void loop() {
   // getting distance
-  // float d = getDistance();
-  getDistance();
-  // bool nowClose = (d < 30);
+  float d = getDistance();
+  bool nowClose = (d < 30);
 
   // Coming near to wave
   if (nowClose && !userClose)
