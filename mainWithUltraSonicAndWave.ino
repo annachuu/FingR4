@@ -85,11 +85,13 @@ float getDistance()
   long duration = pulseIn(ECHO_PIN, HIGH);
   if (duration == 0) 
   {
-    return 999;
+    Serial.println("No echo detected");
   }
-  
   float distance = (duration * 0.034) / 2;
-  return distance;
+  Serial.print(Distance: );
+  Serial.print(distance);
+  Serial.print(" cm");
+  // return distance;
 }
 
 void waveHand()
@@ -120,6 +122,8 @@ void beckon()
 
 
 void setup() {
+  Serial.begin(9600);
+  
   finger[0].attach(9);  // Attach servo to pin 10
   finger[1].attach(10);
   finger[2].attach(11);
