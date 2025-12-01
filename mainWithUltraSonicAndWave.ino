@@ -88,7 +88,7 @@ float getDistance()
     Serial.println("No echo detected");
   }
   float distance = (duration * 0.034) / 2;
-  Serial.print(Distance: );
+  Serial.print("Distance: ");
   Serial.print(distance);
   Serial.print(" cm");
   // return distance;
