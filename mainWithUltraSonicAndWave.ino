@@ -14,6 +14,8 @@
 #define SERVO_PIN3 12
 #define SERVO_PIN4 13
 
+#define WAVE_SERVO_PIN 6
+
 #define TRIG_PIN 8
 #define ECHO_PIN 7
 
@@ -91,7 +93,7 @@ float getDistance()
   float distance = (duration * 0.034) / 2;
   Serial.print("Distance: ");
   Serial.print(distance);
-  Serial.print(" cm");
+  Serial.println(" cm");
 
   return distance;
   // delay(500);
@@ -133,6 +135,8 @@ void setup() {
   finger[3].attach(12);
   finger[4].attach(13);
 
+  waveServo.attach(WAVE_SERVO_PIN);
+
   pinMode(BUTTON_PIN1, INPUT_PULLUP);
   pinMode(BUTTON_PIN2, INPUT_PULLUP);
   pinMode(BUTTON_PIN3, INPUT_PULLUP);
@@ -146,7 +150,8 @@ void setup() {
   // ultrasonic and waving
   pinMode(TRIG_PIN, OUTPUT);
   pinMode(ECHO_PIN, INPUT);
-  waveServo.attach(8);
+  
+  // waveServo.attach(8);
   waveServo.write(90);
 }
 
