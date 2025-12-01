@@ -47,21 +47,21 @@ void moveHand(int f0, int f1, int f2, int f3, int f4)
 /* Preset Position Functions */
 void peaceSign()
 {
-  moveHand(CLOSE, OPEN, OPEN, CLOSE, CLOSE);
+  moveHand(CLOSE, OPEN, CLOSE, CLOSE, CLOSE);
   delay(1000);
   moveHand(OPEN, OPEN, OPEN, OPEN, OPEN);
 }
 
 void thumbsUp()
 {
-  moveHand(OPEN, CLOSE, CLOSE, CLOSE, CLOSE);
+  moveHand(CLOSE, OPEN, OPEN, CLOSE, CLOSE);
   delay(1000);
   moveHand(OPEN, OPEN, OPEN, OPEN, OPEN);
 }
 
 void middleFinger()
 {
-  moveHand(CLOSE, CLOSE, OPEN, CLOSE, CLOSE);
+  moveHand(CLOSE, OPEN, OPEN, OPEN, CLOSE);
   delay(1000);
   moveHand(OPEN, OPEN, OPEN, OPEN, OPEN);
 }
