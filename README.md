@@ -18,6 +18,6 @@ has the ability to portray common hand gestures using preset buttons.
 - **Servo Motors**: Acts as joints to display motion
 
 ## Team Members
-- Anna Chu
-- Rojen Bolito
-- Aimee Nguyen
+- Anna Chu (Main Programmer, Builder, Documentation Writer)
+- Rojen Bolito (Main Documentation Writer, Presentation Writer, Support Specialist)
+- Aimee Nguyen (Main Builder, Documentation Writer)
