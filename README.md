@@ -7,6 +7,9 @@ has the ability to portray common hand gestures using preset buttons.
 - Waves to audience once sensor senses a figure close enough in distance
 - Preset gesture to motion people to come over every few minutes
 
+## Showcase Image
+![Alt Text](images/ShowcaseIMG.jpg)
+
 
 ## Materials
 - **Arduino Uno R4 Circuit Board**
