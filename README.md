@@ -8,7 +8,7 @@ has the ability to portray common hand gestures using preset buttons.
 - Preset gesture to motion people to come over every few minutes
 
 ## Showcase Image
-![Alt Text](images/ShowcaseIMG.jpg)
+![Alt Text](Images/ShowcaseIMG.jpg)
 
 
 ## Materials
