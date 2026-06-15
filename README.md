@@ -9,7 +9,7 @@ has the ability to portray common hand gestures using preset buttons.
 
 ## Showcase Image
 ![Alt Text](Images/ShowcaseIMG.jpg)
-
+- **Photographer:** Jone Robin
 
 ## Materials
 - **Arduino Uno R4 Circuit Board**
